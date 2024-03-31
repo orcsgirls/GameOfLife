@@ -7,6 +7,7 @@ class Simulation:
         self.rows = height // cell_size
         self.columns = width // cell_size
         self.run = False
+        self.generation = 0
 
     def draw(self, window):
         self.grid.draw(window)
@@ -47,7 +48,16 @@ class Simulation:
             for row in range(self.rows):
                 for column in range(self.columns):
                     self.grid.cells[row][column] = self.temp_grid.cells[row][column]
+                    
+            self.generation += 1
 
+    def get_alive_cells(self):
+        alive = 0
+        for row in range(self.rows):
+                for column in range(self.columns):
+                    alive += self.grid.cells[row][column]     
+        return alive
+    
     def is_running(self):
         return self.run
 
@@ -57,18 +67,27 @@ class Simulation:
     def stop(self):
         self.run = False
         
+    def step(self):
+        if self.is_running() == False:
+            self.run = True
+            self.update()
+            self.run = False
+            
     def clear(self):
         if self.is_running() == False:
             self.grid.clear()
+            self.generation = 0
 
     def create_random_state(self):
         if self.is_running() == False:
             self.grid.clear()
+            self.generation = 0
             self.grid.fill_random()
 
     def create_from_image(self, file=''):
         if self.is_running() == False:
             self.grid.clear()
+            self.generation = 0
             self.grid.fill_image(file)
             
     def toggle_cell(self, row, column):
