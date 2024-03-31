@@ -13,4 +13,7 @@ The code requires pygame to be installed. If needed install it using
 - *GameSimple* - Adding simulation class and simple implementation of the game.
 - *GameFancy* - Examples of extensions around use of colors.
 
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/VnjBJFdd51Q/0.jpg)](https://www.youtube.com/watch?v=VnjBJFdd51Q)
+
 Contact: [thomas@orcsgirls.org](mailto:thomas@orcsgirls.org)
