@@ -36,14 +36,13 @@ class Simulation:
                             self.grid.gen_alive[row][column] = 0
                         else:
                             self.temp_grid.cells[row][column] = 1
-                            self.grid.gen_alive[row][column] += 1
+                            if self.grid.gen_alive[row][column] < 18:
+                                self.grid.gen_alive[row][column] += 1
                     else:
                         if live_neighbors == 3:
                             self.temp_grid.cells[row][column] = 1
-                            self.grid.gen_alive[row][column] = 0
                         else:
                             self.temp_grid.cells[row][column] = 0
-                            self.grid.gen_alive[row][column] = 0
 
             for row in range(self.rows):
                 for column in range(self.columns):
@@ -57,19 +56,30 @@ class Simulation:
 
     def stop(self):
         self.run = False
-
+        
     def clear(self):
         if self.is_running() == False:
             self.grid.clear()
 
     def create_random_state(self):
         if self.is_running() == False:
+            self.grid.clear()
             self.grid.fill_random()
 
-    def create_from_image(self, file_name):
+    def create_from_image(self, file=''):
         if self.is_running() == False:
-            self.grid.fill_image(file_name)
+            self.grid.clear()
+            self.grid.fill_image(file)
             
     def toggle_cell(self, row, column):
         if self.is_running() == False:
             self.grid.toggle_cell(row, column)
+            
+    def toggle_generation_view(self):
+        self.grid.toggle_generation_view()
+        
+    def increase_luminescence(self):
+        self.grid.increase_luminescence()
+        
+    def decrease_luminescence(self):
+        self.grid.decrease_luminescence()
