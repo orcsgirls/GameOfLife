@@ -15,7 +15,8 @@ class View:
         self.life_color = pygame.Color((0,255,0))
         self.life_color_hstart = 180
         self.life_color_saturation = 100
-        self.life_color_luminescence  = 70    
+        self.life_color_luminescence  = 70  
+        self.life_color_steps = 20
         self.generation_view = False
         self.set_display() 
         
@@ -23,7 +24,8 @@ class View:
         self.window.fill(self.background_color) 
         for row in range(self.model.rows):
             for column in range(self.model.columns):
-                hue = self.life_color_hstart+self.model.gen_alive[row][column]*10 if self.generation_view else self.life_color_hstart
+                gen_count = min(self.model.gen_alive[row][column] * self.life_color_steps, 180)
+                hue = self.life_color_hstart+gen_count if self.generation_view else self.life_color_hstart
                 self.life_color.hsla=(hue, self.life_color_saturation, self.life_color_luminescence, 100)
                 color = self.life_color if self.model.cells[row][column] else self.dead_color 
                 pygame.draw.rect(self.window, color, (column * self.cell_size, row * self.cell_size, self.cell_size - 1, self.cell_size - 1))

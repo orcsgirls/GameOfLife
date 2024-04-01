@@ -45,8 +45,7 @@ class Model:
                             self.gen_alive[row][column] = 0
                         else:
                             self.cells_temp[row][column] = 1
-                            if self.gen_alive[row][column] < 18:
-                                self.gen_alive[row][column] += 1
+                            self.gen_alive[row][column] += 1
                     else:
                         if live_neighbors == 3:
                             self.cells_temp[row][column] = 1
